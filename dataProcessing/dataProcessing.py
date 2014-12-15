@@ -117,7 +117,10 @@ def changeSPC(flag, dataDict):
                 totalDict[spcDict[pc]].append(0)
                 totalDict[spcDict[pc]][i] += int(gtList[i])
     if flag == 1:
-        return totalDict
+        totalList = []
+        for i in range(len(totalDict.keys())):
+            totalList.append([i, totalDict.keys()[i], totalDict.values()[i]])
+        return totalList
 
     stackList = []
     sortList  = spcDict.keys()

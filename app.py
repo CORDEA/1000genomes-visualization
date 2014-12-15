@@ -4,7 +4,7 @@
 
 __Author__  = "Yoshihiro Tanaka"
 __date__    = "2014-12-15"
-__version__ = "0.1.1 (Beta)"
+__version__ = "0.1.2 (Beta)"
 
 from flask import Flask, redirect, render_template, request, url_for
 application = Flask(__name__)
@@ -103,7 +103,10 @@ def result():
                 allele.append(ref)
             else:
                 allele.append(alt[r-1])
-        alleles.append("|".join(allele))
+        alleles.append("|".join(allele).encode('utf-8'))
+
+    print spcDict
+    print stackList
 
     #allele = [
     #        ref + "|" + ref,
@@ -139,6 +142,6 @@ if __name__ == "__main__":
         user     ='xxxx',
         password ='xxxx',
         host     ='127.0.0.1',
-        database ='xxxx',
+        database ='phase3',
         charset  ='utf8')
     application.run(host="xxxx", debug=True)

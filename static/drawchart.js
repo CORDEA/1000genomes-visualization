@@ -70,22 +70,27 @@ function drawBarChart(item, c) {
 }
 
 
-function drawStackChart(item, ref, alt) {
-    var key = [];
-    var vRR = [];
-    var vAA = [];
-    var vRA = [];
-    var vEE = [];
+function drawStackChart(items, alleles) {
+    var items = items.sort(function (a,b){return (a[0]-b[0]);});
 
-    var sitem = item.sort(function (a,b){return (a[0]-b[0]);});
-
-    for (var keyS in sitem) {
-        key.push(sitem[keyS][1]);
-        vRR.push(sitem[keyS][2][0]);
-        vAA.push(sitem[keyS][2][1]);
-        vRA.push(sitem[keyS][2][2]);
-        vEE.push(sitem[keyS][2][3]);
+    var key = []
+    var dataes = []
+    for (var i=0;i<alleles.length;i++) {
+        dataes.push([])
     }
+
+    for (var j=0;j<items.length;j++) {
+        key.push(items[j][1])
+        for (var i=0;i<items[j][2].length;i++) {
+            dataes[i].push(items[j][2][i])
+        }
+    }
+
+    var series = []
+    for (var i=0;i<alleles.length;i++) {
+        series.push({name: alleles[i], data: dataes[i]})
+    }
+    console.log(series)
 
     $('#barbox').highcharts({
         chart: {
@@ -113,39 +118,31 @@ function drawStackChart(item, ref, alt) {
                 stacking: 'percent'
             }
         },
-            series: [{
-            name: ref + '|' + ref,
-            data: vRR
-        }, {
-            name: alt + '|' + alt,
-            data: vAA
-        }, {
-            name: ref + '|' + alt,
-            data: vRA
-        }, {
-            name: '-|-',
-            data: vEE
-        }]
+            series: series
     });
 }
 
-function drawSPCChart(item, ref, alt) {
-    console.log(item);
-    var key = [];
-    var vRR = [];
-    var vAA = [];
-    var vRA = [];
-    var vEE = [];
+function drawSPCChart(items, alleles) {
+    var items = items.sort(function (a,b){return (a[0]-b[0]);});
 
-    sortList = ["SAS", "EAS", "AFR", "AMR", "EUR"];
-
-    for (var keyS in sortList) {
-        key.push(sortList[keyS]);
-        vRR.push(item[sortList[keyS]][0]);
-        vAA.push(item[sortList[keyS]][1]);
-        vRA.push(item[sortList[keyS]][2]);
-        vEE.push(item[sortList[keyS]][3]);
+    var key = []
+    var dataes = []
+    for (var i=0;i<alleles.length;i++) {
+        dataes.push([])
     }
+
+    for (var j=0;j<items.length;j++) {
+        key.push(items[j][1])
+        for (var i=0;i<items[j][2].length;i++) {
+            dataes[i].push(items[j][2][i])
+        }
+    }
+
+    var series = []
+    for (var i=0;i<alleles.length;i++) {
+        series.push({name: alleles[i], data: dataes[i]})
+    }
+    console.log(series)
 
     $('#spcbox').highcharts({
         chart: {
@@ -173,19 +170,7 @@ function drawSPCChart(item, ref, alt) {
                 stacking: 'percent'
             }
         },
-            series: [{
-            name: ref + '|' + ref,
-            data: vRR
-        }, {
-            name: alt + '|' + alt,
-            data: vAA
-        }, {
-            name: ref + '|' + alt,
-            data: vRA
-        }, {
-            name: '-|-',
-            data: vEE
-        }]
+            series: series
     });
 }
 

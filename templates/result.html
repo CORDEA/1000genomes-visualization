@@ -162,8 +162,8 @@
                     drawPCChart(spcDict, ref, alt)
                     -->
                     <script>drawWMap({{ items[3]|safe }}, {{ items[2]|safe }}, 0)</script>
-                    <script>drawStackChart({{ items[4]|safe }}, "{{info[0]["REF"]}}", "{{info[0]["ALT"]}}")</script>
-                    <script>drawSPCChart({{ spc|safe }}, "{{info[0]["REF"]}}", "{{info[0]["ALT"]}}")</script>
+                    <script>drawStackChart({{ items[4]|safe }}, {{ items[1]|safe }})</script>
+                    <script>drawSPCChart({{ spc|safe }}, {{ items[1]|safe }})</script>
                 </td>
             </tr>
         </table>

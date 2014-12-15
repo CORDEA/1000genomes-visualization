@@ -27,7 +27,7 @@ The repository contains a program of Web services using the SNP data of 1000 Gen
 ### OverView
 * Engine  : InnoDB
 * Size    : 25.2GiB
-* Column  : 85,639,460
+* Column  : 81,271,745
 * Encoding: utf-8
 
 ### Table design
