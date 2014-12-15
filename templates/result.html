@@ -1,0 +1,171 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='jquery-jvectormap-1.2.2.css') }}" type="text/css" media="screen" />
+        <script src="{{ url_for('static', filename='jquery.js') }}"></script>
+        <script src="{{ url_for('static', filename='jquery-ui-1.11.0/jquery-ui.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='jquery-ui-1.11.0/jquery-ui.min.css') }}"></script>
+        <script src="{{ url_for('static', filename='jquery-jvectormap-1.2.2.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='jquery-jvectormap-world-mill-en.js') }}"></script>
+        <script src="{{ url_for('static', filename='highchart/highcharts.js') }}"></script>
+        <script src="{{ url_for('static', filename='highchart/modules/exporting.js') }}"></script>
+        <script src="{{ url_for('static', filename='map.js') }}"></script>
+        <script src="{{ url_for('static', filename='Chart.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='drawchart.js') }}"></script>
+        <script src="{{ url_for('static', filename='check.js') }}"></script>
+        <script src="{{ url_for('static', filename='usejq.js') }}"></script>
+    </head>
+    <body>
+        <div class="header">
+            <table class="headertable">
+                <tr>
+                    <td class="labeltd">
+                        <label class="hlabel">
+                            1000 Genomes Visualization
+                        </label>
+                    </td>
+                    <td class="htd">
+                        <form method=post action="/" class="hform" name="search">
+                            <label>rs number: 
+                                <input id="rsid" name="rsid" type="text" /></label>
+                            <!-- <input class="search" type=submit value=Search> -->
+                            <a  class="sbutton" onclick="document.search.submit()">Search</a>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <h3 class="navbar">Chromosome number: {{info[0]["chr"]}} \  
+            Reference SNP (refSNP): {{ info[0]["id"] }}</h3>
+ 
+        <table class="contents">
+            <tr>
+                <td class="linkbar">
+                    {% if info[1]|length != 0 %}
+                        <table class="links">
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        - links -
+                                    </th>
+                                </tr>
+                                {% for k, v in info[1].items() %}
+                                    <tr>
+                                        <td class="dbname">
+                                            {% if v == False %}
+                                                {{ k }}
+                                            {% else %}
+                                                <a class="dblink" href={{ v }}>{{ k }}</a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </td>
+                <td class="mainc">
+                    {% if info[3]|length == 1 %}
+                        <div class="infbox">
+                            <table class="inftable">
+                                <caption>
+                                    <strong>
+                                        Allele
+                                    </strong>
+                                </caption>
+                                <tbody class="infbody">
+                                    <tr>
+                                        <th>
+                                            RefSNP Alleles
+                                        </th>
+                                        <td>
+                                            {{ info[0]["REF"] }} / {{ info[0]["ALT"] }}
+                                        </td>
+
+                                    <tr>
+                                        <th>
+                                            Chr Pos
+                                        </th>
+                                        <td>
+                                            {{ info[0]["pos"] }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endif %}
+            
+                    <h4 id="chart">Difference in the frequency of genetic variation in each ethnic group</h4>
+                    <div id="mapbox" class="mapbox">
+                        <form id="mapselect">
+                            <div class="mapbutton">
+                                {% for i in range(items[1]|length) %}
+                                <a name="{{ items[1][i] }}" onclick="mapSelect({{ items[3]|safe }}, {{items[2]|safe}}, {{i}})" >{{ items[1][i] }}</a>
+                                {% endfor %}
+                            </div>
+                        </form>
+
+                        <div class="wrap">
+                        <div id="map" class="map" style="width: 800px; height: 500px"></div>
+                            <div id="detail" class="detailbox">
+                                <h4 class="detailbar">Detail</h4>
+                                <div id="content" class="content">
+                                    <table id="detailtable" class="detailtable">
+                                        <tbody>
+                                            <tr>
+                                                <th class="cth">Population Code</th>
+                                                <th id="detailth"></th>
+                                            </tr>
+                                            <tr>
+                                                <th class="cth">Super Population Code</th>
+                                                <th id="detailth"></th>
+                                            </tr>
+                                            <tr>
+                                                <th class="cth">Population Description</th>
+                                                <th id="detailth"></th>
+                                            </tr>
+                                            <tr>
+                                                <th class="cth">Frequency</th>
+                                                <th id="detailth"></th>
+                                            </tr> 
+                                        </tbody>
+                                    </table>
+                                    <table id="freqtable" class="freqtable">
+                                        <thead class="freqthead">
+                                            <tr class="freqtr">
+                                                <th>Genotype</th>
+                                                <th>Freq (%)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for i in range(items[1]|length) %}
+                                                <tr>
+                                                    <th>{{ items[1][i] }}</th>
+                                                    <td id="detailth"></td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody> 
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="graphbox">
+                            <div id="barbox" class="barbox"></div>
+                            <div id="spcbox" class="spcbox"></div>
+                        </div>
+                    </div>
+                    <!--<script>drawPolarChart({{ spc|safe }}, 0)</script>-->
+                    <!--
+                    drawWMap(data(freq), markersList, c)
+                    drawStackChart(stackList, ref, alt)
+                    drawPCChart(spcDict, ref, alt)
+                    -->
+                    <script>drawWMap({{ items[3]|safe }}, {{ items[2]|safe }}, 0)</script>
+                    <script>drawStackChart({{ items[4]|safe }}, "{{info[0]["REF"]}}", "{{info[0]["ALT"]}}")</script>
+                    <script>drawSPCChart({{ spc|safe }}, "{{info[0]["REF"]}}", "{{info[0]["ALT"]}}")</script>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

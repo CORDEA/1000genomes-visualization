@@ -1,0 +1,46 @@
+{% from "_formhelpers.html" import render_field %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='search.css') }}" type="text/css" />  
+        <link href='http://fonts.googleapis.com/css?family=Petit+Formal+Script' rel='stylesheet' type='text/css'>
+        <script src="//j.wovn.io/0" data-wovnio="key=qvh3m"></script>
+    </head>
+
+    <body>
+        <div class="box">
+            <h1>
+                <div>
+                1000 Genomes
+                <img src="{{ url_for('static', filename='index/1G_logo.png') }}" />
+                Visualization
+            </div>
+            </h1>
+            <div class="center">
+                <dl>
+                <form method=post action="/" class="hform" name="search">
+                    <dt>
+                        <label>rs number [Ex. 186143557]:</label>
+                    </dt>
+                    <dd>
+                        <input id="rsid" name="rsid" type="text" />
+                    </dd>
+
+                    <dt>
+                        <label>position [Ex. 1]:</label>
+                    </dt>
+                    <dd>
+                        <input id="position" name="position" type="text" />
+                    </dd>
+
+                    <p class="sbutton">
+                        <a href="#" onclick="document.search.submit()">Search</a>
+                    </p>
+                </form>
+                </dl>
+                {% if form[1] %}
+                    <h2>Data does not exist, or ID is incorrect.</h2>
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,358 @@
+html {
+    font-family: Verdana, Arial, sans-serif;
+}
+
+
+body {
+    background-color: #f9f9f9;
+    margin: 0px;
+}
+
+h4 {
+    background-color: #6a8685;
+    padding: 5px 5px 5px 10px;
+    color: #ffffff;
+}
+
+h4.detailbar {
+    width: 487px;
+}
+
+h3.navbar {
+    background-color: #556a69;
+    padding: 10px 5px 20px 10px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    color: #ffffff;
+}
+
+h2 {
+    background-color: #38778b;
+    color: #ffffff;
+}
+
+caption {
+    border-top: 1px #575757 solid;
+    background-color: #A1C6D2;
+    padding: 5px;
+}
+
+table.main {
+    border-top: 1px #2b2b2b solid;
+    border-bottom: 1px #2b2b2b solid;
+    border-collapse: collapse;
+    text-align: center;
+    width: 1100px;
+    height: 160px;
+    margin: 20px 10px 20px 10px;
+}
+
+table.contents {
+    border-spacing: 0px;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+table.links {
+    color: #ffffff;
+    width: 150px;
+    margin: 50px auto 0px auto;
+    text-align: center;
+}
+
+td.linkbar {
+    vertical-align: top;
+    background-color: #556a69;
+    width: 200px;
+    padding: 0px;
+}
+
+td.mainc {
+    width: 100% - 200px;
+    padding: 10px 0px 10px 0px;
+}
+
+td.dbname {
+    color: #BCB5B5;
+}
+
+a.dblink:link {
+    color: #ffffff;
+}
+
+p {
+    text-indent: 2em;
+}
+
+th.th_style {
+    background-color: #c9cdcf;
+}
+
+div.header {
+    background-color: #b3bdbc;
+}
+
+table.headertable {
+    width: 100%;
+}
+
+label.hlabel {
+    margin: 5px auto 5px 15px;
+    font-weight: bold;
+}
+
+form.hform {
+    margin: 5px 15px 5px auto;
+}
+
+td.labeltd {
+    width: 30%;
+}
+
+td.htd {
+    width: 70%;
+    text-align: right;
+    margin: 5px 15px 5px auto;
+}
+
+div.infbox {
+    margin-bottom: 20px;
+}
+
+div.subinfbox div {
+    display: inline-block;
+    margin: 5px 0px 5px 0px;
+}
+
+div.mapbox {
+    display: block;
+    padding: 20px;
+    margin-left: 30px;
+}
+
+div.barbox {
+    width: 800px;
+}
+
+div.spcbox {
+    width: 400px;
+}
+
+div.tablebox {
+    display: block;
+    padding: 20px;
+    margin-left: 30px;
+}
+
+div.tablebox div {
+    display: none;
+}
+
+div.graphbox {
+    width: 1200px;
+    display: flex;
+}
+
+div.detail {
+    display: block;
+    padding: 20px;
+}
+
+div.row {
+    display: table-row;
+}
+
+div.row>div {
+    display: table-cell;
+    padding: 0px;
+    margin: 10px;
+}
+
+div.cell {
+    height: 20px;
+
+}
+
+div.wrap {
+    height: 500px;
+    width: 1600px;
+
+}
+
+div.map {
+    border: 0px solid #000000;
+    float: left;
+}
+
+div.detailbox {
+    float: left;
+    height: 500px;
+    margin-left: 20px;
+}
+
+div.content {
+    border: 1.5px #2b2b2b solid;
+    background-color: #f3f5f5;
+    display: none;
+    width: 500px;
+    margin: auto;
+}
+
+div.margin {
+    width: 10px;
+}
+
+table.detailtable {
+    display: block;
+    border-collapse: collapse;
+    text-align: center;
+    width: 480px;
+    height: 150px;
+    border: 0px;
+    margin: auto;
+}
+
+table.detailtable tbody tr {
+    padding: 5px 0px 5px 0px;
+}
+
+table.freqtable {
+    display: block;
+    margin: 20px auto 30px auto;
+    text-align: center;
+    border-collapse: collapse;
+    width: 350px;
+    height: 100px;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+}
+
+thead.freqthead {
+    border-bottom: 1px solid #000000;
+}
+
+table.inftable {
+    display: block;
+    margin-left: 50px;
+    text-align: center;
+    border-collapse: collapse;
+    width: 280px;
+    height: 100px;
+}
+
+tbody.infbody {
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+}
+
+th.cth {
+    width: 200px;
+}
+
+form.checkbox {
+    margin: 10px;
+}
+
+input.search {
+}
+
+.pie {
+    display: none;
+    margin: 10px;
+    border: 1px solid #000000;
+}
+
+canvas.piechart {
+    margin: 5px;
+
+}
+
+div.piebox {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+div.polgroup {
+    display: none;
+}
+
+div.polbox {
+}
+
+input.mapbutton {
+    width: 50px;
+    height: 20px;
+    font-size: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+div.mapbutton a {
+    margin: 0px 2px 0px 2px;
+    width:80px;
+    padding:5px;
+    background:#405dca;
+    color:#ffffff;
+    text-align:center;
+    display:inline-block;
+    text-decoration:none;
+}
+
+div.mapbutton a:hover {
+    text-decoration:none;
+    background:#364ea5;
+}
+
+a.sbutton {
+    margin: 0px 20px 0px 10px;
+    width:80px;
+    padding:4px;
+    background:#405dca;
+    color:#ffffff;
+    text-align:center;
+    display:inline-block;
+    text-decoration:none;
+}
+
+a.sbutton:hover {
+    text-decoration:none;
+    background:#364ea5;
+}
+
+a.obutton {
+    margin: 0px 20px 20px 10px;
+    width:150px;
+    padding:4px;
+    background:#405dca;
+    color:#ffffff;
+    text-align:center;
+    display:inline-block;
+    text-decoration:none;
+}
+
+a.obutton:hover {
+    text-decoration:none;
+    background:#364ea5;
+}
+
+div.tableButton a {
+    margin: 0px 2px 0px 2px;
+    width:500px;
+    padding: 5px;
+    margin: 10px 60px;
+    background:#405dca;
+    color:#ffffff;
+    text-align:center;
+    display:block;
+    text-decoration:none;
+}
+
+div.tableButton a:hover {
+    text-decoration:none;
+    background:#364ea5;
+}
+
+tr.margin {
+    margin: 5px;
+}

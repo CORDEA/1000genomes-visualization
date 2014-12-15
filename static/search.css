@@ -1,0 +1,124 @@
+html {
+    font-family: Verdana, Arial, sans-serif;
+}
+
+body {
+    background-color: #e1e1e1;
+    margin: 0px;
+}
+
+h1 {
+    font-family: 'Petit Formal Script', cursive;
+    font-weight: 700;
+    font-size: 40px;
+    background-color: #0091ae;
+    color: #ffffff;
+    margin-top: 0px;
+    padding: 10px 0px 10px 0px;
+    -webkit-box-shadow: 0px 5px 10px #777;
+    -moz-box-shadow: 0px 5px 10px #777;
+    box-shadow: 0px 5px 10px #777;
+    text-align: center;
+}
+
+h1 div {
+    height: 100px;
+}
+
+h1 div img {
+    width: 100px;
+    vertical-align: middle;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+div.box {
+    padding-bottom: 200px;
+}
+
+div.center {
+    margin: auto;
+    width: 500px;
+    padding-top: 50px;
+}
+
+div.main {
+    margin: auto;
+}
+
+div.tablebox {
+    margin: auto;
+    width: 900px;
+}
+
+input.search {
+    margin-left: 300px;
+    font-size: 15px;
+    background:#405dca;
+    color:#ffffff;
+    text-align:center;
+    display:block;
+    text-decoration:none;
+}
+
+table.main {
+    display: inline-block;
+    border-top: 1px #2b2b2b solid;
+    border-bottom: 1px #2b2b2b solid;
+    border-collapse: collapse;
+    text-align: center;
+    width: 400px;
+    height: 160px;
+    margin: 20px 10px;
+}
+
+table.main thead tr th {
+    background-color: #c9cdcf;
+}
+
+table.main thead tr {
+    border-bottom: 1px #2b2b2b solid;
+}
+
+table.main tbody tr:nth-child(odd) {
+    background-color: #ccc;
+}
+
+td.rsid, th.rsid {
+    text-align: center;
+    width: 40%;
+}
+
+dl {
+    padding: 5px;
+}
+
+dd {
+    margin-top: 10px;
+}
+
+dd textarea {
+    width: 200px;
+    height: 250px;
+}
+
+p.sbutton {
+}
+
+p.sbutton a {
+    margin: 0px 80px 0px auto;
+    width:90px;
+    padding:8px;
+    background:#405dca;
+    color:#ffffff;
+    text-align:center;
+    display:block;
+    text-decoration:none;
+}
+
+p.sbutton a:hover {
+    text-decoration:none;
+    background:#364ea5;
+}
