@@ -22,34 +22,35 @@ def createList(flag):
     with open("dataProcessing/sample_population.tsv") as f:
         lines = f.readlines()
 
-    cList   = [
-            'GWD',
-            'CLM',
-            'BEB',
-            'PEL',
-            'LWK',
-            'MSL',
-            'GBR',
-            'IBS',
-            'ASW',
-            'FIN',
-            'TSI',
-            'KHV',
-            'CEU',
-            'YRI',
-            'CHB',
-            'STU',
-            'CHS',
-            'ESN',
-            'ACB',
-            'GIH',
-            'PJL',
-            'MXL',
-            'ITU',
-            'CDX',
-            'JPT',
-            'PUR'
-            ]
+    cList = list(set([r.split("\t")[1] for r in lines]))
+    #cList   = [
+    #        'GWD',
+    #        'CLM',
+    #        'BEB',
+    #        'PEL',
+    #        'LWK',
+    #        'MSL',
+    #        'GBR',
+    #        'IBS',
+    #        'ASW',
+    #        'FIN',
+    #        'TSI',
+    #        'KHV',
+    #        'CEU',
+    #        'YRI',
+    #        'CHB',
+    #        'STU',
+    #        'CHS',
+    #        'ESN',
+    #        'ACB',
+    #        'GIH',
+    #        'PJL',
+    #        'MXL',
+    #        'ITU',
+    #        'CDX',
+    #        'JPT',
+    #        'PUR'
+    #        ]
     country = {} 
     spcDict = {}
     for line in lines:
@@ -60,7 +61,16 @@ def createList(flag):
     if flag == 1:
         return cList
     if flag == 2:
-        return spcDict
+        with open("dataProcessing/sort.txt") as f:
+            lines = f.readlines()
+        pcSort = spcSort = {}
+        for line in lines:
+            items = line.split()
+            if '*' in items[0]:
+                spcSort[items[0].lstrip('*')] = items[1]
+            else:
+                pcSort[items[0]] = items[1]
+        return pcSort, spcSort, spcDict
     if flag == 3:
         return country
 
@@ -105,7 +115,7 @@ def toPer(dataDict):
 #                 ["Population Code", "Population Code"]
 #             }
 def changeSPC(flag, dataDict):
-    spcDict   = createList(2)
+    pcSort, spcSort, spcDict   = createList(2)
     totalDict = {}
     for pc, gtList in dataDict.items():
         if spcDict[pc] not in totalDict:
@@ -118,15 +128,13 @@ def changeSPC(flag, dataDict):
                 totalDict[spcDict[pc]][i] += int(gtList[i])
     if flag == 1:
         totalList = []
-        for i in range(len(totalDict.keys())):
-            totalList.append([i, totalDict.keys()[i], totalDict.values()[i]])
+        for key, value in totalDict.items():
+            totalList.append([int(spcSort[key]), key, value])
         return totalList
 
     stackList = []
-    sortList  = spcDict.keys()
-    for i in range(len(sortList)):
-        if sortList[i] in dataDict:
-            stackList.append([i, sortList[i], dataDict[sortList[i]]])
+    for key, value in dataDict.items():
+        stackList.append([int(pcSort[key]), key, value])
     return stackList
 
 def setMarkers(dataDict):

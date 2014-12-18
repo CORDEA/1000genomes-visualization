@@ -4,7 +4,7 @@
 
 __Author__  = "Yoshihiro Tanaka"
 __date__    = "2014-12-15"
-__version__ = "0.1.2 (Beta)"
+__version__ = "0.1.3 (Beta)"
 
 from flask import Flask, redirect, render_template, request, url_for
 application = Flask(__name__)
@@ -72,7 +72,6 @@ def result():
         cursor.execute('select * from main where ' + target[0] + '="' + str(target[1]) + '"', ())
         rows = cursor.fetchall()[0]
         cursor.close()
-        cList    = createList(1) 
         for k, v in rows.items():
             if k == "info":
                 conStr = v
