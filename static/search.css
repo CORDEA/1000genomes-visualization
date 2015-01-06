@@ -53,6 +53,14 @@ div.tablebox {
     width: 900px;
 }
 
+div.notification {
+    margin: 50px 0px 10px 50px;
+}
+
+div.notification h3 {
+    color: red;
+}
+
 input.search {
     margin-left: 300px;
     font-size: 15px;
@@ -95,6 +103,10 @@ dl {
     padding: 5px;
 }
 
+dt {
+    padding: 10px 0px 10px 0px;
+}
+
 dd {
     margin-top: 10px;
 }
@@ -121,4 +133,12 @@ p.sbutton a {
 p.sbutton a:hover {
     text-decoration:none;
     background:#364ea5;
+}
+
+input.upload {
+    float: right;
+}
+
+input.mail {
+    width: 250px;
 }

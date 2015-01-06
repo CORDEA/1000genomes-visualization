@@ -1,0 +1,52 @@
+{% from "_formhelpers.html" import render_field %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='search.css') }}" type="text/css" />  
+        <link href='http://fonts.googleapis.com/css?family=Petit+Formal+Script' rel='stylesheet' type='text/css'>
+    </head>
+
+    <body>
+        <div class="box">
+            <h1>
+                <div>
+                Which ethnic
+                <img src="{{ url_for('static', filename='index/1G_logo.png') }}" />
+                group am I ?
+            </div>
+            </h1>
+            <div class="notification">
+                <h3>
+                    [NOTIFICATION]
+                    This service is alpha version.
+                    Therefore, it might return unexpected results.
+                </h3>
+            </div>
+            <div class="center">
+                               <dl>
+                    <form action="upload" method="post" enctype="multipart/form-data">
+                        <dt>
+                            <label>23andMe SNPs file (only *.txt)</label>
+                        </dt>
+                        <dd>
+                            <input type="file" name="data">
+                        </dd>
+                        <dt>
+                            <label>Mail address</label>
+                        </dt>
+                        <dd>
+                            <input class="mail" type="text" name="mail" id="mail">
+                        </dd>
+                        <p>
+                            <input class="upload" type="submit" value="Upload">
+                        </p>
+                    </form>
+                </dl>
+                {% if err == 1 %}
+                    <h2> Failed Upload process </h2>
+                {% elif err == 0 %}
+                    <h2> Thank you </h2>
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>

@@ -7,8 +7,15 @@ The repository contains a program of Web services using the SNP data of 1000 Gen
 
 ## Use library
 * Python
+    * numpy
+    * scipy
     * Flask
+    * Jinja2
+    * werkzeug
+    * wtforms
     * MySQL.connector
+    * scikit-learn
+    * smtplib
 * JavaScript
     * jQuery
     * jVectorMap
@@ -20,6 +27,7 @@ The repository contains a program of Web services using the SNP data of 1000 Gen
 * MySQL.connector 1.2.2
 * jQuery 1.11.0
 * jVectorMap 1.2.2
+* scikit-learn 0.15.2
 
 
 ## DataBase
