@@ -15,12 +15,12 @@ from wtforms import Form, BooleanField, TextField, TextAreaField, PasswordField,
 import mysql.connector
 
 from dataProcessing.dataProcessing import *
-import os, hashlib, time
+import os, hashlib, time, commands
 
 class SearchForm(Form):
-    position  = TextField('Position [Ex. 1]', [validators.Length(min=1, max=15)])
     rsid      = TextField('rs [Ex. 186143557]', [validators.Length(min=1, max=15)])
-    mail      = TextField('mail address', [validators.Length(min=1, max=40)])
+    chrom     = TextField('Chromosome [Ex. 1]', [validators.Length(min=1, max=2)])
+    position  = TextField('Position [Ex. 1]', [validators.Length(min=1, max=15)])
 
 class MySQLCursorDict(mysql.connector.cursor.MySQLCursor):
     def _row_to_python(self, rowdata, desc=None):
@@ -29,16 +29,19 @@ class MySQLCursorDict(mysql.connector.cursor.MySQLCursor):
             return dict(zip(self.column_names, row))
         return None
 
+
 @application.route("/", methods=['GET', 'POST'])
 def index():
     mes = False
     mes = request.args.get('mes')
     form = SearchForm(request.form)
     if request.method == 'POST':
-        if request.form['position']:
-            return redirect(url_for('result', pos=form.position.data))
+        if request.form['position'] and request.form['chrom']:
+            if request.form['btn'] == 'Search by position and chromosome number':
+                return redirect(url_for('result', chrom=form.chrom.data, pos=form.position.data))
         elif request.form['rsid']:
-            return redirect(url_for('result', rsid=form.rsid.data))
+            if request.form['btn'] == 'Search by rsID':
+                return redirect(url_for('result', rsid=form.rsid.data))
 
     return render_template('index.html', 
                             form = [form, mes])
@@ -47,32 +50,33 @@ def index():
 def result():
     form = SearchForm(request.form)
     if request.method == 'POST':
-        if request.form['position']:
-            return redirect(url_for('result', pos=form.position.data))
-        elif request.form['rsid']:
+        if request.form['rsid']:
             return redirect(url_for('result', rsid=form.rsid.data))
 
     dataDict = {}
     perDict  = {}
-    rsid = request.args.getlist('rsid')
-    pos  = request.args.getlist('pos')
+    chrom = request.args.getlist('chrom')
+    rsid  = request.args.getlist('rsid')
+    pos   = request.args.getlist('pos')
 
     idList = []
     if len(rsid) != 0:
         rsid = rsid[0]
         if "rs" not in rsid:
             rsid = "rs"+str(rsid)
-        target = ["id",rsid]
+        query = 'id="' + str(rsid) + '"'
     elif len(pos) != 0:
-        pos = pos[0]
-        target = ["pos",pos]
+        if len(chrom) != 0:
+            pos   = pos[0]
+            chrom = chrom[0]
+            query = 'pos="' + str(pos) + '" and ' + 'chr="' + str(chrom) + '"'
 
     err = 0
     try:
         conDict  = {}
         infoDict = {}
         cursor = connect.cursor(cursor_class=MySQLCursorDict)
-        cursor.execute('select * from main where ' + target[0] + '="' + str(target[1]) + '"', ())
+        cursor.execute('select * from main where ' + query, ())
         rows = cursor.fetchall()[0]
         cursor.close()
         for k, v in rows.items():
@@ -81,7 +85,7 @@ def result():
             else:
                 infoDict[k] = v
         setList, dataDict  = toList(conStr)
-        if target[0] == "pos":
+        if "pos" in query:
             pingDict  = {}
         else:
             pingDict  = links(str(rsid))
@@ -106,17 +110,6 @@ def result():
             else:
                 allele.append(alt[r-1])
         alleles.append("|".join(allele).encode('utf-8'))
-
-    print spcDict
-    print stackList
-
-    #allele = [
-    #        ref + "|" + ref,
-    #        alt + "|" + alt,
-    #        ref + "|" + alt,
-    #        "-|-",
-    #        "ALL"
-    #        ]
 
     country = createList(3)
 
@@ -143,23 +136,25 @@ def prediction():
 def upload():
     data = request.files['data']
     form = SearchForm(request.form)
-    if request.method == 'POST' and request.form['mail']:
+    if request.method == 'POST':
         if data and data.filename.split('.')[-1] in ['txt', 'TXT']:
             filename = secure_filename(data.filename)
             sha = hashlib.sha224(str(time.time())).hexdigest()
             filepath = "uploads/" + sha
             data.save(filepath)
-            with open('uploads/' + sha + '.log', "w") as f:
-                f.write(form.mail.data)
 
-        #spcDict = samplePrediction("spc", filepath)
-        #pCode   = spcDict["RESULT"]
-        #print pCode
-        #pcDict  = samplePrediction(pCode.lower(), filepath)
-        #print pcDict
-            os.system('nohup python samplePrediction/samplePrediction.py "' + sha + '" > /dev/null 2> log/' + sha + '.log &')
-            return render_template('pred.html', err = 0)
+            os.system('nohup python samplePrediction/samplePrediction.py "' + sha + '" 2>&1 > log/' + sha + '.log &')
+            return redirect(url_for('.waitProcessing', sha = sha))
     return render_template('pred.html', err = 1)
+
+@application.route('/wait')
+def waitProcessing():
+    sha = request.args['sha']
+    ls = [r.rstrip(".html") for r in commands.getoutput('ls templates/presult/').split("\n")]
+    if sha in ls:
+        return redirect(url_for('.showResult', sha = sha))
+    else:
+        return render_template('wait.html', sha = sha)
 
 @application.route('/presult/<sha>')
 def showResult(sha):
@@ -174,6 +169,6 @@ if __name__ == "__main__":
         user     ='xxx',
         password ='xxx',
         host     ='127.0.0.1',
-        database ='xxx',
+        database ='phase3',
         charset  ='utf8')
     application.run(host="xxx", debug=True)

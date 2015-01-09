@@ -23,41 +23,12 @@ def createList(flag):
         lines = f.readlines()
 
     cList = list(set([r.split("\t")[1] for r in lines]))
-    #cList   = [
-    #        'GWD',
-    #        'CLM',
-    #        'BEB',
-    #        'PEL',
-    #        'LWK',
-    #        'MSL',
-    #        'GBR',
-    #        'IBS',
-    #        'ASW',
-    #        'FIN',
-    #        'TSI',
-    #        'KHV',
-    #        'CEU',
-    #        'YRI',
-    #        'CHB',
-    #        'STU',
-    #        'CHS',
-    #        'ESN',
-    #        'ACB',
-    #        'GIH',
-    #        'PJL',
-    #        'MXL',
-    #        'ITU',
-    #        'CDX',
-    #        'JPT',
-    #        'PUR'
-    #        ]
     country = {} 
     spcDict = {}
     for line in lines:
         items = line.split("\t")
         country[items[1]] = [items[2], items[3]]
         spcDict[items[1]] = items[2]
-    #cList   = set(cList)
     if flag == 1:
         return cList
     if flag == 2:

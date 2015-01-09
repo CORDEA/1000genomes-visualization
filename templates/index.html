@@ -16,25 +16,39 @@
             </h1>
             <div class="center">
                 <dl>
-                <form method=post action="/" class="hform" name="search">
-                    <dt>
-                        <label>rs number [Ex. 186143557]:</label>
-                    </dt>
-                    <dd>
-                        <input id="rsid" name="rsid" type="text" />
-                    </dd>
+                    <form method=post action="/" class="hform" name="form">
+                        <dt>
+                            <label>rs number [Ex. 186143557]:</label>
+                        </dt>
+                        <dd>
+                            <input id="rsid" name="rsid" type="text" />
+                        </dd>
 
-                    <dt>
-                        <label>position [Ex. 1]:</label>
-                    </dt>
-                    <dd>
-                        <input id="position" name="position" type="text" />
-                    </dd>
+                        <p class="sbutton">
+                            <input type="submit" name="btn" value="Search by rsID">
+                        </p>
 
-                    <p class="sbutton">
-                        <a href="#" onclick="document.search.submit()">Search</a>
-                    </p>
-                </form>
+                        <dt class="warn">
+                            <label>Chromosome number and the position should be entered together.</label>
+                        </dt>
+                        <dt>
+                            <label>chromosome [Ex. 1]:</label>
+                        </dt>
+                        <dd>
+                            <input id="chrom" name="chrom" type="text" />
+                        </dd>
+
+                        <dt>
+                            <label>position [Ex. 1]:</label>
+                        </dt>
+                        <dd>
+                            <input id="position" name="position" type="text" />
+                        </dd>
+
+                        <p class="sbutton">
+                            <input type="submit" name="btn" value="Search by position and chromosome number">
+                        </p>
+                    </form>
                 </dl>
                 {% if form[1] %}
                     <h2>Data does not exist, or ID is incorrect.</h2>

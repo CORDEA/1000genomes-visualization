@@ -23,15 +23,50 @@
             </table>
         </div>
         <h3 class="navbar">Prediction Result</h3>
+        <div class="msg">
+            {% if warn[0] %}
+                <h3>
+                    [ERROR] Target of SNP did not exist in your data. Therefore prediction has failed.
+                </h3>
+            {% elif warn[1] %}
+                <h3>
+                    [WARNING] SPC prediction was successful but, PC prediction failed.
+                </h3>
+            {% endif %}
+        </div>
         <table class="contents">
-            <tr>
-                <div id="spccontainer"></div>
-            </tr>
-            <tr>
-                <div id="pccontainer"></div>
-            </tr>
+            {% if not warn[0] %}
+                <tr>
+                    <div id="spccontainer"></div>
+                </tr>
+                <script>drawPieChart("spc", {{ spcDict|safe }})</script>
+            {% endif %}
+            {% if not warn[1] %}
+                <tr>
+                    <div id="pccontainer"></div>
+                </tr>
+                <script>drawPieChart("pc", {{ pcDict|safe }})</script>
+            {% endif %}
         </table>
-        <script>drawPieChart("spc", {{ spcDict|safe }})</script>
-        <script>drawPieChart("pc", {{ pcDict|safe }})</script>
+        <div class="ngdiv">
+            <div>
+                {% for k, Dict in ngDict.items() %}
+                    <table class="ngtable">
+                        <caption>{{ k }}</caption>
+                        <tbody>
+                            {% for rsID, v in Dict.items() %}
+                                <tr>
+                                    <td>
+                                        {{ rsID }}
+                                    </td>
+                                    <td>
+                                        {{ v }}
+                                    </td>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endfor %}
+            </div>
+        </div>
     </body>
 </html>

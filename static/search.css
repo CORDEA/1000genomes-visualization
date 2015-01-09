@@ -34,13 +34,17 @@ h2 {
     font-size: 18px;
 }
 
+h2.predh2 {
+    margin-top: 50px;
+}
+
 div.box {
     padding-bottom: 200px;
 }
 
 div.center {
     margin: auto;
-    width: 500px;
+    width: 700px;
     padding-top: 50px;
 }
 
@@ -107,6 +111,11 @@ dt {
     padding: 10px 0px 10px 0px;
 }
 
+dt.warn {
+    margin-top: 50px;
+    color: red;
+}
+
 dd {
     margin-top: 10px;
 }
@@ -133,6 +142,10 @@ p.sbutton a {
 p.sbutton a:hover {
     text-decoration:none;
     background:#364ea5;
+}
+
+p.sbutton input {
+    margin-left: 250px;
 }
 
 input.upload {

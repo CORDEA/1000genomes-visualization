@@ -30,21 +30,18 @@
                         <dd>
                             <input type="file" name="data">
                         </dd>
-                        <dt>
-                            <label>Mail address</label>
-                        </dt>
-                        <dd>
-                            <input class="mail" type="text" name="mail" id="mail">
-                        </dd>
                         <p>
                             <input class="upload" type="submit" value="Upload">
                         </p>
                     </form>
                 </dl>
                 {% if err == 1 %}
-                    <h2> Failed Upload process </h2>
+                    <h2 class="predh2"> Failed Upload process </h2>
                 {% elif err == 0 %}
-                    <h2> Thank you </h2>
+                    <h2 class="predh2">
+                        Thank you for uploading the data of 23andMe.<br />
+                        When the process is complete, will notified by e-mail from "nbio-snp@gmail.com".
+                    </h2>
                 {% endif %}
             </div>
         </div>

@@ -1,0 +1,32 @@
+{% from "_formhelpers.html" import render_field %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='search.css') }}" type="text/css" />  
+        <link href='http://fonts.googleapis.com/css?family=Petit+Formal+Script' rel='stylesheet' type='text/css'>
+        <script src="{{ url_for('static', filename='jquery.js') }}"></script>
+        <script src="{{ url_for('static', filename='jquery-ui-1.11.0/jquery-ui.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='jquery-ui-1.11.0/jquery-ui.min.css') }}"></script>
+        <script src="{{ url_for('static', filename='pred/wait.js') }}"></script>
+
+    </head>
+    <body>
+        <div class="box">
+            <h1>
+                <div>
+                Which ethnic
+                <img src="{{ url_for('static', filename='index/1G_logo.png') }}" />
+                group am I ?
+            </div>
+            </h1>
+            <div class="notification">
+                <h3>
+                    [NOTIFICATION]
+                    This service is alpha version.
+                    Therefore, it might return unexpected results.
+                </h3>
+                <h3>wait...</h3>
+            </div>
+            <script>setInterval('window.location.reload()', 10000)</script>
+        </div>
+    </body>
+</html>
