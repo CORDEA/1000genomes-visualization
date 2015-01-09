@@ -72,6 +72,11 @@ div.ngdiv div {
     float: center;
 }
 
+p.ngp {
+    margin-top: 50px;
+    font-size: 20px;
+}
+
 table.ngtable {
     display: inline-block;
     border-top: 1px #2b2b2b solid;

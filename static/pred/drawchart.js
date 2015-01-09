@@ -7,6 +7,12 @@ function drawPieChart(name, item) {
         }
     }
 
+    if (name == 'spc') {
+            title = "Super population"
+    } else {
+            title = "Population"
+    }
+
     $('#' + name + 'container').highcharts({
         chart: {
             plotBackgroundColor: null,
@@ -14,7 +20,7 @@ function drawPieChart(name, item) {
             plotShadow: false
         },
         title: {
-            text: 'Prediction Result: ' + name
+            text: 'Prediction Result: ' + title
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -34,7 +40,7 @@ function drawPieChart(name, item) {
         },
         series: [{
             type: 'pie',
-            name: name,
+            name: 'probability',
             data: data
         }]
     });

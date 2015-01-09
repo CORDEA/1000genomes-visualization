@@ -65,6 +65,13 @@ div.notification h3 {
     color: red;
 }
 
+div.info {
+    font-weight: 700;
+    font-size: 20px;
+    text-align: right;
+    padding: 100px 100px 0px 0px;
+}
+
 input.search {
     margin-left: 300px;
     font-size: 15px;

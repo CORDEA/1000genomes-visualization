@@ -45,11 +45,8 @@ class FeatureExtraction:
             for line in f:
                 items = line.rstrip().split("\t")
                 gtDict[items[0]] = [items[1], items[2]]
-        
-        for k, v in gtDict.items():
-            print "gtDict:", str(k), str(v)
-            break
 
+        ngDict   = {}
         infile = open('../uploads/' + sha, "r")
         tmpDict = {}
         line = infile.readline()
@@ -86,9 +83,8 @@ class FeatureExtraction:
             line = infile.readline()
 
         testdata = []
-        ngDict   = {}
         c = 0
-        for ID in gtList.keys():
+        for ID in gtDict.keys():
             if ID in tmpDict:
                 testdata.append(tmpDict[ID])
                 ngDict[ID] = "Read"

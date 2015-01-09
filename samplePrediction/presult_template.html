@@ -50,9 +50,16 @@
         </table>
         <div class="ngdiv">
             <div>
+                <p class="ngp">
+                    SNPs list that used for prediction.
+                </p>
                 {% for k, Dict in ngDict.items() %}
                     <table class="ngtable">
-                        <caption>{{ k }}</caption>
+                        {% if k == "spc" %}
+                            <caption>Super Population</caption>
+                        {% else %}
+                            <caption>Population</caption>
+                        {% endif %}
                         <tbody>
                             {% for rsID, v in Dict.items() %}
                                 <tr>
