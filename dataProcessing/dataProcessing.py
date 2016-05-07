@@ -16,7 +16,7 @@
 
 __Author__  = "Yoshihiro Tanaka"
 __date__    = "2014-12-04"
-__version__ = "1.0.0 (Stable)"
+__version__ = "1.0.0"
 
 def createList(flag):
     with open("dataProcessing/sample_population.tsv") as f:

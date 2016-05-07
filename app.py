@@ -16,7 +16,7 @@
 
 __Author__ =  "Yoshihiro Tanaka"
 __date__    = "2014-12-15"
-__version__ = "0.1.4 (Stable)"
+__version__ = "1.0.4"
 
 from flask import Flask, redirect, render_template, request, url_for, send_from_directory
 from werkzeug import secure_filename
